@@ -1,4 +1,5 @@
-﻿<div class="container body-content">
+﻿@using System.Diagnostics
+<div class="container body-content">
 
     <h1>@ViewBag.title</h1>
 
@@ -28,6 +29,44 @@
 
     @{
         //TODO #4: Loop over the search results to display all job fields.
+        try
+        {
+            if (ViewBag.jobs == null)
+                {
+                    ViewBag.jobs = "nothing";
+                }
+            foreach (Job jobX in ViewBag.jobs)
+            {
+                <table class="job-listing">
+                    <tr>
+                        <td>Job title</td>
+                        <td>@jobX.Name</td>
+                    </tr>
+                    <tr>
+                        <td>Employer</td>
+                        <td>@jobX.Employer</td>
+                    </tr>
+                    <tr>
+                        <td>Location</td>
+                        <td>@jobX.Location</td>
+                    </tr>
+                    <tr>
+                        <td>Postion Type</td>
+                        <td>@jobX.PositionType</td>
+                    </tr>
+                    <tr>
+                        <td>Competency</td>
+                        <td>@jobX.CoreCompetency</td>
+                    </tr>
+                </table>
+            } 
+        }
+        catch (Exception x)
+        {
+            Debug.WriteLine("Exception:" + @x);
+        }
+
+       
     }
 
 </div>
