@@ -7,7 +7,14 @@
     <tr>
         @foreach(var column in ViewBag.columns)
         {
-            <th>@column.Value</th>
+            if (column.Value == "All")
+            {
+                <th><a href="/List/Jobs?column=all">All</a></th>
+            }
+            else
+            {
+                <th>@column.Value</th>
+            }
         }
     </tr>
     <tr>

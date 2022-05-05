@@ -33,7 +33,9 @@
         {
             if (ViewBag.jobs == null)
                 {
-                    ViewBag.jobs = "nothing";
+                    List<Job> noJobs = new List<Job>();
+                    ViewBag.jobs = noJobs;
+                    Debug.WriteLine("ViewBag.jobs == null");
                 }
             foreach (Job jobX in ViewBag.jobs)
             {

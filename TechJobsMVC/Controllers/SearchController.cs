@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -24,31 +25,45 @@ namespace TechJobsMVC.Controllers
         [HttpPost]
         public IActionResult Results(string searchType, string searchTerm)
 		{
+            if (searchTerm == null)
+			{
+                searchTerm = "nothing";
+			}
             ViewBag.columns = ListController.ColumnChoices;
             List<Job> jobs;
-            if (searchType == "All")
+            if (searchType == "all")
 			{
                 jobs = JobData.FindByValue(searchTerm);
 			}
 
-            if (searchType == "Employer")
+            else if (searchType == "employer")
 			{
                 jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
             }
 
-            if (searchType == "Postion")
+            else if (searchType == "positionType")
             {
                 jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
             }
 
-            if (searchType == "CoreCompetency")
+            else if (searchType == "coreCompetency")
             {
+                jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
+            }
+            else if (searchType == "location")
+			{
                 jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
             }
 			else
 			{
                 jobs = null;
 			}
+
+            /*if (jobs == null)
+			{
+                Debug.WriteLine("No jobs were found for search type: " + searchType + " and search term " + searchTerm);
+            }
+            */
 
             ViewBag.jobs = jobs;
             return View("Index");

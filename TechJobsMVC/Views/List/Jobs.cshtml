@@ -4,7 +4,11 @@
 
     @{
         //TODO #1: Use a loop to display job results in a table.
-
+        @if (ViewBag.jobs.Count > 1)
+        {
+            <h3>@ViewBag.jobs.Count Results</h3>
+        }
+        
         foreach (Job jobX in ViewBag.jobs)
             {
                 <table class="job-listing">
